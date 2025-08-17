@@ -1,0 +1,20 @@
+{
+  "rules": [
+    {
+      "id": "rule-boost-electronics",
+      "campaign": "Electronics",
+      "action": "Increase Budget",
+      "benefit": "Predicted ROAS +0.06",
+      "explanation": "Electronics category shows strong CVR; increasing budget can scale results."
+    },
+    {
+      "id": "rule-trim-general",
+      "campaign": "General",
+      "action": "Decrease Bids",
+      "benefit": "Predicted CPA -8%",
+      "explanation": "High CPC detected relative to conversions; trim bids to improve efficiency."
+    }
+  ]
+}
+
+

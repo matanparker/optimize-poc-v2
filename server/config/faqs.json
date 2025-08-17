@@ -1,0 +1,18 @@
+{
+  "faqs": [
+    {
+      "q": "What are the top factors driving the highest conversion rates?",
+      "a": "Top drivers: product category 'Electronics', regions 'Europe' and 'Asia Pacific', and orders with quantity > 5. Increase budget on high CVR segments."
+    },
+    {
+      "q": "Which campaigns are underperforming against benchmark?",
+      "a": "Campaigns with CPC > 500 and CVR < 0.01 are below benchmark. Consider decreasing bids or reallocating budget."
+    },
+    {
+      "q": "Show me the executive summary for the last 14 days",
+      "a": "Impressions ~1.2M, Reach ~35k, Frequency 3.2, Conversions 1.1k, ROAS 1.6. Top recs: Increase Budget for Electronics, Decrease Bids for General."
+    }
+  ]
+}
+
+
