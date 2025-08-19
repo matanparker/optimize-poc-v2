@@ -162,6 +162,14 @@ def create_app() -> Flask:
     def health() -> Any:
         return jsonify({"status": "ok"})
 
+    @app.route("/api/healthz", methods=["GET"])
+    def api_healthz() -> Any:
+        return jsonify({"status": "ok", "service": "optimize-server"})
+
+    @app.route("/healthz", methods=["GET"])
+    def healthz() -> Any:
+        return jsonify({"status": "ok", "service": "optimize-server"})
+
     @app.route("/api/login", methods=["POST"])
     def login() -> Any:
         body = request.get_json(silent=True) or {}

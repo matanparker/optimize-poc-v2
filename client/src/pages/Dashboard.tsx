@@ -36,27 +36,32 @@ export default function Dashboard() {
 
   return (
     <div className="fade-in">
-      <div className="grid grid-cols-1 md:grid-cols-3" style={{ marginBottom: '24px' }}>
-        <div className="card md:col-span-3" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
-            <div style={{ width: '100%', maxWidth: '50%' }}>
-              <label htmlFor="campaign-filter">Select Campaign</label>
-              <select id="campaign-filter" style={{ width: '100%' }}>
-                <option value="all">All Campaigns</option>
-                <option value="campaign-alpha">Campaign Alpha (Q1)</option>
-                <option value="campaign-beta">Campaign Beta (Q2)</option>
-                <option value="campaign-gamma">Campaign Gamma (Q3)</option>
-              </select>
-            </div>
-            <div style={{ width: '100%', maxWidth: '50%' }}>
-              <label htmlFor="time-filter">Performance Window</label>
-              <select id="time-filter" value={windowDays} onChange={e => setWindowDays(Number(e.target.value))} style={{ width: '100%' }}>
-                <option value={7}>Last 7 Days</option>
-                <option value={14}>Last 14 Days</option>
-                <option value={30}>Last 30 Days</option>
-              </select>
-            </div>
+      <h1 className="section-title">Media</h1>
+
+      {/* Campaign Overview Card */}
+      <div className="card p-6 mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
+        <div>
+          <span className="text-xs text-gray-500 block mb-1">Campaign ID</span>
+          <span className="font-medium">123456</span>
+        </div>
+        <div>
+          <span className="text-xs text-gray-500 block mb-1">Media Buyer</span>
+          <span className="font-medium">ABC Agency</span>
+        </div>
+        <div>
+          <span className="text-xs text-gray-500 block mb-1">Spend Group</span>
+          <span className="font-medium">4 Groups</span>
+        </div>
+        <div className="flex items-center justify-end md:col-span-2 lg:col-span-1 space-x-4">
+          <div className="flex items-center">
+            <svg className="w-5 h-5 text-blue-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <span className="text-blue-500 font-medium">Hypermode</span>
           </div>
+          <button className="btn-primary">
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <span>Import / Export</span>
+            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
         </div>
       </div>
 

@@ -96,11 +96,11 @@ eksctl create cluster -f eks-cluster.yaml
 
 ```bash
 # Create ECR repositories
-aws ecr create-repository --repository-name optimize-client --region us-west-2
-aws ecr create-repository --repository-name optimize-server --region us-west-2
+aws ecr create-repository --repository-name optimize-demo-client --region us-east-2
+aws ecr create-repository --repository-name optimize-demo-server --region us-east-2
 
 # Get ECR login token
-aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-west-2.amazonaws.com
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-east-2.amazonaws.com
 ```
 
 ### Build and Push Images
@@ -108,15 +108,25 @@ aws ecr get-login-password --region us-west-2 | docker login --username AWS --pa
 ```bash
 # Get your AWS account ID
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com"
+ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.us-east-2.amazonaws.com"
 
 # Build and push client image
-docker build -t ${ECR_REGISTRY}/optimize-client:latest ./client
-docker push ${ECR_REGISTRY}/optimize-client:latest
+# docker build -t ${ECR_REGISTRY}/optimize-demo-client:latest ./client
+# docker push ${ECR_REGISTRY}/optimize-demo-client:latest
+docker buildx build \
+  --platform linux/amd64 \
+  -t 149536489145.dkr.ecr.us-east-2.amazonaws.com/optimize-demo-client:latest \
+  --push ./client
+
 
 # Build and push server image  
-docker build -f server/Dockerfile -t ${ECR_REGISTRY}/optimize-server:latest .
-docker push ${ECR_REGISTRY}/optimize-server:latest
+docker buildx build \
+  --platform linux/amd64,linux/arm64 \
+  -f server/Dockerfile \
+  -t ${ECR_REGISTRY}/optimize-demo-server:latest \
+  --push .
+# docker build -f server/Dockerfile -t ${ECR_REGISTRY}/optimize-demo-server:latest .
+# docker push ${ECR_REGISTRY}/optimize-demo-server:latest
 ```
 
 ## 3. AWS Load Balancer Controller

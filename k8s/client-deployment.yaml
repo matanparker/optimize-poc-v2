@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
       - name: optimize-client
-        image: optimize-client:latest
-        imagePullPolicy: Never  # Use local image in Minikube
+        image: 149536489145.dkr.ecr.us-east-2.amazonaws.com/optimize-demo-client
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
           name: http

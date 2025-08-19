@@ -1,0 +1,35 @@
+# optimize-client Service - port 80
+apiVersion: v1
+kind: Service
+metadata:
+  name: optimize-client
+  namespace: optimize-demo
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: /
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+spec:
+  type: ClusterIP
+  selector:
+    app: optimize-client
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+# optimize-server Service - port 5000
+apiVersion: v1
+kind: Service
+metadata:
+  name: optimize-server
+  namespace: optimize-demo
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: /api/health
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+spec:
+  type: ClusterIP
+  selector:
+    app: optimize-server
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000

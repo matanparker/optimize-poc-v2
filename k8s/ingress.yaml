@@ -3,17 +3,31 @@ kind: Ingress
 metadata:
   name: optimize-ingress
   namespace: optimize-demo
+  labels:
+    app: optimize-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:149536489145:certificate/869e4285-4bd9-4255-9301-5aba722f5ce2
+    alb.ingress.kubernetes.io/group.name: optimize-demo-group
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/subnets: subnet-0c51abbe92c9b952c, subnet-04ead1cdb56d4b0eb,
+      subnet-09bb04fef54e91f58
+    alb.ingress.kubernetes.io/security-groups: sg-044fe9899ada04f01
+    alb.ingress.kubernetes.io/healthcheck-path: /healthz
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15'
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '5'
+    alb.ingress.kubernetes.io/success-codes: '200'
+    alb.ingress.kubernetes.io/healthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=60
 spec:
-  ingressClassName: nginx
+  ingressClassName: alb
   rules:
-  - host: optimize.local
+  - host: optimize-demo.internal.stage.innovid-xp.com
     http:
       paths:
-      # API routes to Flask backend
       - path: /api
         pathType: Prefix
         backend:
@@ -21,7 +35,6 @@ spec:
             name: optimize-server
             port:
               number: 5000
-      # Everything else to React frontend
       - path: /
         pathType: Prefix
         backend:
@@ -29,3 +42,4 @@ spec:
             name: optimize-client
             port:
               number: 80
+
