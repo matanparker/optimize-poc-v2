@@ -13,7 +13,7 @@ def create_app() -> Flask:
     app = Flask(__name__)
     CORS(app)
 
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    base_dir = os.path.dirname(os.path.abspath(__file__))
     small_csv_path = os.path.join(base_dir, "demo_data_small.csv")
     medium_csv_path = os.path.join(base_dir, "demo_data_medium.csv")
     config_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config")
@@ -256,9 +256,11 @@ def create_app() -> Flask:
     return app
 
 
+# Create app instance for Gunicorn
+app = create_app()
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5001))
-    app = create_app()
     app.run(host="0.0.0.0", port=port, debug=True)
 
 
