@@ -100,7 +100,7 @@ aws ecr create-repository --repository-name optimize-demo-client --region us-eas
 aws ecr create-repository --repository-name optimize-demo-server --region us-east-2
 
 # Get ECR login token
-aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-east-2.amazonaws.com
+aws ecr get-login-password --region us-east-2 --profile meas-stage | docker login --username AWS --password-stdin 149536489145.dkr.ecr.us-east-2.amazonaws.com
 ```
 
 ### Build and Push Images
